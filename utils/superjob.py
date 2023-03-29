@@ -24,10 +24,12 @@ class SuperJob(Engine):
                 self.vacancies.append(Vacancy('SuperJob',
                                               vacancy['id'],
                                               vacancy['profession'],
-                                              vacancy['payment_from'],
+                                              vacancy['firm_name'],
                                               vacancy['town']['title'],
-                                              vacancy['candidat'],
-                                              vacancy['link']))
+                                              [vacancy['payment_from'], vacancy['payment_to'], vacancy['currency']],
+                                              vacancy['experience']['title'],
+                                              vacancy['link'],
+                                              vacancy['date_published']))
         return self.vacancies
 
     # def to_json(self):
