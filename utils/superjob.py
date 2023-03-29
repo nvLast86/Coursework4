@@ -30,6 +30,19 @@ class SuperJob(Engine):
                                               vacancy['link']))
         return self.vacancies
 
+    # def to_json(self):
+    #     vacancies_listtemp = []
+    #     for vacancy in self.vacancies:
+    #          vacancies_listtemp.append({'source': vacancy.source,
+    #                                     'id': vacancy.id,
+    #                                     'profession': vacancy.profession,
+    #                                     'salary': vacancy.salary,
+    #                                     'area': vacancy.area,
+    #                                     'description': vacancy.description,
+    #                                     'url': vacancy.url
+    #                                     # 'publish_date': vacancy.date
+    #                                     })
+    #     return json.dumps(vacancies_listtemp)
 
 if __name__ == '__main__':
     test = SuperJob('python')
