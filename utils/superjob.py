@@ -26,7 +26,7 @@ class SuperJob(Engine):
                                               vacancy['profession'],
                                               vacancy['payment_from'],
                                               vacancy['town']['title'],
-                                              vacancy['work'],
+                                              vacancy['candidat'],
                                               vacancy['link']))
         return self.vacancies
 
