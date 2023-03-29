@@ -1,13 +1,15 @@
 class Vacancy:
 
-    def __init__(self, source, id, profession, salary, area, description, url):
+    def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, url, date_published):
         self.source = source
-        self.id = id
+        self.vacancy_id = vacancy_id
         self.profession = profession
-        self.salary = salary
+        self.firm_name = firm_name
         self.area = area
-        self.description = description
+        self.payment = payment
+        self.experience = experience
         self.url = url
+        self.date_published = date_published
 
     def __repr__(self):
         return f'{self.profession} в городе {self.area}.\nЗарплата: {self.salary}.\n{self.description}\n' \
