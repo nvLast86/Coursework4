@@ -1,3 +1,4 @@
+from datetime import datetime
 class Vacancy:
 
     def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, url, date_published):
@@ -12,7 +13,34 @@ class Vacancy:
         self.date_published = date_published
 
     def __repr__(self):
-        return f'{self.profession} в городе {self.area}.\nЗарплата: {self.salary}.\n{self.description}\n' \
-               f'Ссылка на вакансию: {self.url}\n'
+        return f'{self.profession} в компанию {self.firm_name} в городе {self.area}.\n' \
+               f'Опыт: {self.format_experience_answer()}. Зарплата: {self.format_payment_answer()}.\n' \
+               f'Ссылка на вакансию: {self.url}.\nДата публикации: {self.format_date()}\n'
+
+    def format_payment_answer(self):
+        if self.payment[0] > 0 and self.payment[1] > 0:
+            pay_answer = f'от {self.payment[0]} до {self.payment[1]} {self.payment[2]}'
+        elif self.payment[0] > 0 and self.payment[1] == 0:
+            pay_answer = f'от {self.payment[0]} {self.payment[2]}'
+        elif self.payment[0] == 0 and self.payment[1] > 0:
+            pay_answer = f'до {self.payment[1]} {self.payment[2]}'
+        else:
+            pay_answer = 'не указана'
+        return pay_answer
+
+    def format_experience_answer(self):
+        if self.experience == 0:
+            exp_answer = 'не указан'
+        else:
+            exp_answer = self.experience
+        return exp_answer
+
+    def format_date(self):
+        date = datetime.fromtimestamp(self.date_published).strftime("%d.%m.%Y %X")
+        return date
+
+
+
+
 
 
