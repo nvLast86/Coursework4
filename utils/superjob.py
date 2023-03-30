@@ -36,6 +36,13 @@ class SuperJob(Engine):
                                           vacancy['date_published']))
         return self.vacancies
 
+    def get_description(self, response):
+        description = []
+        temp = response['candidat'].split('.')
+        for i in range(2):
+            description.append(temp[i])
+        return '. '.join(description)
+
     # def to_json(self):
     #     vacancies_listtemp = []
     #     for vacancy in self.vacancies:
