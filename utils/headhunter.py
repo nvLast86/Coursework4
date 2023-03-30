@@ -36,6 +36,9 @@ class HeadHunter(Engine):
                                           vacancy['published_at']))
         return self.vacancies
 
+    def __add__(self, other):
+        return self.vacancies + other.vacancies
+
     @staticmethod
     def correct_vacancies(response):
         for item in response:
