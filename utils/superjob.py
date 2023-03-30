@@ -14,21 +14,26 @@ class SuperJob(Engine):
         self.vacancies = []
 
     def get_request(self):
-        header = {'X-Api-App-Id': SuperJob.sj_key}
+        response_full = []
+        header = {'X-Api-App-Id': SuperJob.key}
         for i in range(5):
             params = {'keyword': self.keyword, 'count': 100, 'page': i}
             response = requests.get(
-                SuperJob.sj_url, headers=header, params=params).json()['objects']
-            for vacancy in response:
-                self.vacancies.append(Vacancy('SuperJob',
-                                              vacancy['id'],
-                                              vacancy['profession'],
-                                              vacancy['firm_name'],
-                                              vacancy['town']['title'],
-                                              [vacancy['payment_from'], vacancy['payment_to'], vacancy['currency']],
-                                              vacancy['experience']['title'],
-                                              vacancy['link'],
-                                              vacancy['date_published']))
+                SuperJob.url, headers=header, params=params).json()['objects']
+            response_full += response
+        return response_full
+
+    def get_vacancies(self, response):
+        for vacancy in response:
+            self.vacancies.append(Vacancy('SuperJob',
+                                          vacancy['id'],
+                                          vacancy['profession'],
+                                          vacancy['firm_name'],
+                                          vacancy['town']['title'],
+                                          [vacancy['payment_from'], vacancy['payment_to'], vacancy['currency']],
+                                          vacancy['experience']['title'],
+                                          vacancy['link'],
+                                          vacancy['date_published']))
         return self.vacancies
 
     # def to_json(self):
