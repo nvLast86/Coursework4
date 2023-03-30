@@ -1,7 +1,8 @@
 from datetime import datetime
 class Vacancy:
 
-    def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, url, date_published):
+    def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, description, url,
+                 date_published):
         self.source = source
         self.vacancy_id = vacancy_id
         self.profession = profession
@@ -9,6 +10,7 @@ class Vacancy:
         self.area = area
         self.payment = payment
         self.experience = experience
+        self.description = description
         self.url = url
         self.date_published = date_published
 
@@ -36,7 +38,10 @@ class Vacancy:
         return exp_answer
 
     def format_date(self):
-        date = datetime.fromtimestamp(self.date_published).strftime("%d.%m.%Y %X")
+        if self.source == 'SuperJob':
+            date = datetime.fromtimestamp(self.date_published).strftime("%d.%m.%Y %X")
+        else:
+            date = datetime.fromisoformat(self.date_published).strftime("%d.%m.%Y %X")
         return date
 
 
