@@ -6,9 +6,8 @@ from utils.vacancy import Vacancy
 
 
 class SuperJob(Engine):
-    sj_key = os.getenv('SJ_API_KEY')
-    sj_vacancies = []
-    sj_url = 'https://api.superjob.ru/2.0/vacancies/'
+    key = os.getenv('SJ_API_KEY')
+    url = 'https://api.superjob.ru/2.0/vacancies/'
 
     def __init__(self, keyword):
         self.keyword = keyword
@@ -48,5 +47,8 @@ class SuperJob(Engine):
 
 if __name__ == '__main__':
     test = SuperJob('python')
-    print({test.get_request())
+    print(test.get_request())
+    print(len(test.get_request()))
+    # print(test.to_json())
+
 
