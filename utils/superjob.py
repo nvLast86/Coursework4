@@ -36,7 +36,8 @@ class SuperJob(Engine):
                                           vacancy['date_published']))
         return self.vacancies
 
-    def get_description(self, response):
+    @staticmethod
+    def get_description(response):
         description = []
         temp = response['candidat'].split('.')
         for i in range(2):
@@ -56,6 +57,7 @@ class SuperJob(Engine):
     #                                     # 'publish_date': vacancy.date
     #                                     })
     #     return json.dumps(vacancies_listtemp)
+
 
 if __name__ == '__main__':
     test = SuperJob('python')
