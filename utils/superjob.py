@@ -23,7 +23,7 @@ class SuperJob(Engine):
             response_full += response
         return response_full
 
-    def get_vacancies(self, response):
+    def get_vacancies_list(self, response):
         for vacancy in response:
             self.vacancies.append(Vacancy('SuperJob',
                                           vacancy['id'],
@@ -32,6 +32,7 @@ class SuperJob(Engine):
                                           vacancy['town']['title'],
                                           [vacancy['payment_from'], vacancy['payment_to'], vacancy['currency']],
                                           vacancy['experience']['title'],
+                                          self.get_description(vacancy),
                                           vacancy['link'],
                                           vacancy['date_published']))
         return self.vacancies
@@ -61,7 +62,9 @@ class SuperJob(Engine):
 
 if __name__ == '__main__':
     test = SuperJob('python')
-    print(test.get_request())
+    x = test.get_request()
+    print(test.get_vacancies_list(x))
+
     print(len(test.get_request()))
     # print(test.to_json())
 
