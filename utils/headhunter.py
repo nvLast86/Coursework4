@@ -43,6 +43,8 @@ class HeadHunter(Engine):
                                           [vacancy['salary']['from'], vacancy['salary']['to'],
                                           vacancy['salary']['currency']],
                                           vacancy['experience'] if 'experience' in vacancy.keys() else 'не указан',
+                                          'отсутствует' if vacancy.get('snippet').get('responsibility') is None else
+                                          vacancy.get('snippet').get('responsibility'),
                                           vacancy['alternate_url'],
                                           vacancy['published_at']))
         return self.vacancies
