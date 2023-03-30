@@ -20,20 +20,7 @@ class HeadHunter(Engine):
             response_full += response
         return response_full
 
-    def correct_vacancies(self, response):
-        for item in response:
-            if item['salary'] is None:
-                item['salary'] = {'from': 0, 'to': 0, 'currency': ''}
-            if 'from' not in item['salary'].keys():
-                item['salary']['from'] = 0
-            if 'to' not in item['salary'].keys():
-                item['salary']['to'] = 0
-            if item['salary']['from'] is None:
-                item['salary']['from'] = 0
-            if item['salary']['to'] is None:
-               item['salary']['to'] = 0
-
-    def get_vacancies(self, response):
+    def get_vacancies_list(self, response):
         for vacancy in response:
             self.vacancies.append(Vacancy('HeadHunter',
                                           vacancy['id'],
@@ -49,12 +36,25 @@ class HeadHunter(Engine):
                                           vacancy['published_at']))
         return self.vacancies
 
+    @staticmethod
+    def correct_vacancies(response):
+        for item in response:
+            if item['salary'] is None:
+                item['salary'] = {'from': 0, 'to': 0, 'currency': ''}
+            if 'from' not in item['salary'].keys():
+                item['salary']['from'] = 0
+            if 'to' not in item['salary'].keys():
+                item['salary']['to'] = 0
+            if item['salary']['from'] is None:
+                item['salary']['from'] = 0
+            if item['salary']['to'] is None:
+               item['salary']['to'] = 0
 
 if __name__ == '__main__':
     test = HeadHunter('python')
     x = test.get_request()
     test.correct_vacancies(x)
-    test.get_vacancies(x)
+    test.get_vacancies_list(x)
     print(test.vacancies)
     print(len(test.vacancies))
     # print(test.correct_vacancies(x))
