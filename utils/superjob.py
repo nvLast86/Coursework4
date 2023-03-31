@@ -37,9 +37,6 @@ class SuperJob(Engine):
                                           vacancy['date_published']))
         return self.vacancies
 
-    def __add__(self, other):
-        return self.vacancies + other.vacancies
-
     @staticmethod
     def get_description(response):
         description = []
