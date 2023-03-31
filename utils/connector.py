@@ -1,5 +1,7 @@
 from utils.headhunter import HeadHunter
 from utils.superjob import SuperJob
+from datetime import datetime
+import json
 
 
 class Connector:
@@ -56,4 +58,8 @@ if __name__ == '__main__':
     sj.get_vacancies_list(sj.get_request())
     connector = Connector()
     connector.united_vacancies_list = hh + sj
-    print(connector.united_vacancies_list)
+    print(len(connector.united_vacancies_list))
+
+
+
+
