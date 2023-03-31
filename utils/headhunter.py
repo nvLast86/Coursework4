@@ -18,6 +18,7 @@ class HeadHunter(Engine):
             params = {'text': self.keyword, 'area': 113, 'page': i, 'per_page': 100}
             response = requests.get(HeadHunter.url, params=params).json()['items']
             response_full += response
+            self.correct_vacancies(response_full)
         return response_full
 
     def get_vacancies_list(self, response):
