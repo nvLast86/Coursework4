@@ -4,6 +4,7 @@ from vacancy import Vacancy
 from datetime import datetime
 from engine import Engine
 
+
 class HeadHunter(Engine):
     url = 'https://api.hh.ru/vacancies'
 
@@ -36,9 +37,6 @@ class HeadHunter(Engine):
                                           vacancy['alternate_url'],
                                           vacancy['published_at']))
         return self.vacancies
-
-    def __add__(self, other):
-        return self.vacancies + other.vacancies
 
     @staticmethod
     def correct_vacancies(response):
