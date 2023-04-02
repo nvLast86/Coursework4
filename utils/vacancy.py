@@ -1,4 +1,19 @@
 class Vacancy:
+    """
+    Класс, экземпляры которого собирают всю необходимую информацию о вакансии:
+    source - источник вакансии (сайт HeadHunter или SuperJob)
+    vacancy_id - уникальный идентификатор вакансии на сайте
+    profession - должность
+    firm_name = наименование компании/ИП
+    area = город, в котором расположена компания
+    payment - зарплата (передается список, содержащий минимальную и максимальную оплату, заявленные
+              работодателем, а также валюта. Если какая информация отсутствует, то ставятся нули в
+              соответствующие поля)
+    experience - опыт (если нету информации, то записывается "не указан")
+    description - описание вакансии
+    url - ссылка на вакансию на сайте
+    date_published - дата публикации вакансии на сайте
+    """
 
     def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, description, url,
                  date_published):
@@ -20,6 +35,11 @@ class Vacancy:
                f'Ссылка на вакансию: {self.url}.\nДата публикации: {self.date_published}\n'
 
     def format_payment_answer(self):
+        """
+        Вспомогательный метод формирования описания вакансии, а именно зарплаты, т.к.
+        не все работодатели указывают диапазон или хотя бы минимальную или
+        максимальную оплату.
+        """
         if self.payment[0] > 0 and self.payment[1] > 0:
             pay_answer = f'от {self.payment[0]} до {self.payment[1]} {self.payment[2]}'
         elif self.payment[0] > 0 and self.payment[1] == 0:
