@@ -11,31 +11,27 @@ class HeadHunter(Engine):
     def __init__(self, keyword):
         self.keyword = keyword
         self.vacancies = []
+        self.get_vacancies()
 
 
-    def get_request(self):
-        response_full = []
+    def get_vacancies(self):
         for i in range(5):
             params = {'text': self.keyword, 'area': 113, 'page': i, 'per_page': 100}
             response = requests.get(HeadHunter.url, params=params).json()['items']
-            response_full += response
-            self.correct_vacancies(response_full)
-        return response_full
-
-    def get_vacancies_list(self, response):
-        for vacancy in response:
-            self.vacancies.append(Vacancy('HeadHunter',
-                                          vacancy['id'],
-                                          vacancy['name'],
-                                          vacancy['employer']['name'],
-                                          vacancy['area']['name'],
-                                          [vacancy['salary']['from'], vacancy['salary']['to'],
-                                          vacancy['salary']['currency']],
-                                          vacancy['experience'] if 'experience' in vacancy.keys() else 'не указан',
-                                          'отсутствует' if vacancy.get('snippet').get('responsibility') is None else
-                                          vacancy.get('snippet').get('responsibility'),
-                                          vacancy['alternate_url'],
-                                          vacancy['published_at']))
+            self.correct_vacancies(response)
+            for vacancy in response:
+                self.vacancies.append(Vacancy('HeadHunter',
+                                              vacancy['id'],
+                                              vacancy['name'],
+                                              vacancy['employer']['name'],
+                                              vacancy['area']['name'],
+                                              [vacancy['salary']['from'], vacancy['salary']['to'],
+                                              vacancy['salary']['currency']],
+                                              vacancy['experience'] if 'experience' in vacancy.keys() else 'не указан',
+                                              'отсутствует' if vacancy.get('snippet').get('responsibility') is None else
+                                              vacancy.get('snippet').get('responsibility'),
+                                              vacancy['alternate_url'],
+                                              self.format_date(vacancy['published_at'])))
         return self.vacancies
 
     @staticmethod
