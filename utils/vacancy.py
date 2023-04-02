@@ -15,7 +15,7 @@ class Vacancy:
         self.date_published = date_published
 
     def __repr__(self):
-        return f'{self.profession}.\nКомпания {self.firm_name}, город {self.area}.\n' \
+        return f'Требуется: {self.profession}.\nКомпания {self.firm_name}, город {self.area}.\n' \
                f'Опыт: {self.experience}. Зарплата: {self.format_payment_answer()}.\n' \
                f'Описание: {self.description}\n' \
                f'Ссылка на вакансию: {self.url}.\nДата публикации: {self.date_published}\n'
