@@ -15,7 +15,7 @@ class Connector:
 
     @united_vacancies_list.setter
     def united_vacancies_list(self, value):
-        self.__united_vacancies_list = value
+        self.__united_vacancies_list = sorted(value, key=lambda x: x.date_published, reverse=True)
 
     @united_vacancies_list.getter
     def united_vacancies_list(self):
