@@ -4,6 +4,7 @@ from utils.superjob import SuperJob
 
 user_decisions = []
 
+
 def main():
     # Объясняем для чего данная программа. Далее запрашиваем ключевое слово и производим парсинг
     print('Приветствую!\nДанный парсер собирает с сайтов HeadHunter и SuperJob 1000 вакансий (по 500 с каждого)\n'
@@ -44,5 +45,3 @@ def main():
 
 
 main()
-
-
