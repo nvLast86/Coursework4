@@ -8,6 +8,7 @@ class Connector:
 
     def __init__(self):
         self.__united_vacancies_list = []
+        self.chosen_vacancies_list = []
 
     @property
     def united_vacancies_list(self):
