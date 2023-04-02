@@ -12,9 +12,9 @@ class SuperJob(Engine):
     def __init__(self, keyword):
         self.keyword = keyword
         self.vacancies = []
+        self.get_vacancies()
 
-    def get_request(self):
-        response_full = []
+    def get_vacancies(self):
         header = {'X-Api-App-Id': SuperJob.key}
         for i in range(5):
             params = {'keyword': self.keyword, 'count': 100, 'page': i}
