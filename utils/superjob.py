@@ -46,7 +46,7 @@ class SuperJob(Engine):
 
     @staticmethod
     def format_date(value):
-        date = datetime.fromtimestamp(value).strftime("%d.%m.%Y %X")
+        date = datetime.fromtimestamp(value).strftime("%Y-%m-%d %X")
         return date
 
 
