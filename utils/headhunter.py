@@ -48,7 +48,7 @@ class HeadHunter(Engine):
             if item['salary']['from'] is None:
                 item['salary']['from'] = 0
             if item['salary']['to'] is None:
-               item['salary']['to'] = 0
+                item['salary']['to'] = 0
 
     @staticmethod
     def format_date(value):
