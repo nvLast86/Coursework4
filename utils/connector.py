@@ -48,6 +48,13 @@ class Connector:
         with open(f'vacancies on {datetime.now().date()}.txt', 'w', encoding='utf-8') as outfile:
             json.dump(json_file, outfile, ensure_ascii=False)
 
+    @staticmethod
+    def print_vacancies_to_file(vacancy_list):
+        with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
+            for i in range(len(vacancy_list)):
+                outfile.write(f'{i+1}. {vacancy_list[i]}\n')
+
+
 
 
 
