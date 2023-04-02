@@ -1,6 +1,6 @@
 import requests
 import os
-from engine import Engine
+from utils.engine import Engine
 from utils.vacancy import Vacancy
 from datetime import datetime
 

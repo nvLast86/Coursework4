@@ -1,8 +1,8 @@
 import json
 import requests
-from vacancy import Vacancy
+from utils.vacancy import Vacancy
 from datetime import datetime
-from engine import Engine
+from utils.engine import Engine
 
 
 class HeadHunter(Engine):
