@@ -29,7 +29,8 @@ class SuperJob(Engine):
                                               vacancy['profession'],
                                               vacancy['firm_name'],
                                               vacancy['town']['title'],
-                                              [int(vacancy['payment_from']), int(vacancy['payment_to']), vacancy['currency']],
+                                              [int(vacancy['payment_from']), int(vacancy['payment_to']),
+                                               vacancy['currency']],
                                               vacancy['experience']['title'],
                                               vacancy['candidat'],
                                               vacancy['link'],
@@ -40,4 +41,3 @@ class SuperJob(Engine):
     def format_date(value):
         date = datetime.fromtimestamp(value).strftime("%Y-%m-%d %X")
         return date
-
