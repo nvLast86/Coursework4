@@ -36,23 +36,8 @@ class SuperJob(Engine):
                                               self.format_date(vacancy['date_published'])))
         return self.vacancies
 
-    # @staticmethod
-    # def get_description(response):
-    #     description = []
-    #     temp = response['candidat'].split('.')
-    #     for i in range(2):
-    #         description.append(temp[i])
-    #     return '. '.join(description)
-
     @staticmethod
     def format_date(value):
         date = datetime.fromtimestamp(value).strftime("%Y-%m-%d %X")
         return date
-
-
-if __name__ == '__main__':
-    test = SuperJob('python')
-    print(test)
-
-
 
