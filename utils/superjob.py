@@ -3,6 +3,7 @@ import os
 import json
 from engine import Engine
 from utils.vacancy import Vacancy
+from datetime import datetime
 
 
 class SuperJob(Engine):
@@ -29,7 +30,7 @@ class SuperJob(Engine):
                                               vacancy['experience']['title'],
                                               self.get_description(vacancy),
                                               vacancy['link'],
-                                              vacancy['date_published']))
+                                              self.format_date(vacancy['date_published'])))
         return self.vacancies
 
     @staticmethod
@@ -40,15 +41,15 @@ class SuperJob(Engine):
             description.append(temp[i])
         return '. '.join(description)
 
-    #
+    @staticmethod
+    def format_date(value):
+        date = datetime.fromtimestamp(value).strftime("%d.%m.%Y %X")
+        return date
 
 
 if __name__ == '__main__':
     test = SuperJob('python')
-    x = test.get_request()
-    print(test.get_vacancies_list(x))
+    print(test)
 
-    print(len(test.get_request()))
-    # print(test.to_json())
 
 
