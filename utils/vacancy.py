@@ -1,4 +1,3 @@
-from datetime import datetime
 class Vacancy:
 
     def __init__(self, source, vacancy_id, profession, firm_name, area, payment, experience, description, url,
