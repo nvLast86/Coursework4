@@ -1,6 +1,6 @@
 from utils.headhunter import HeadHunter
 from utils.superjob import SuperJob
-from datetime import datetime
+from datetime import *
 import json
 
 
