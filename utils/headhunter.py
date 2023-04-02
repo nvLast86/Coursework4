@@ -53,7 +53,7 @@ class HeadHunter(Engine):
 
     @staticmethod
     def format_date(value):
-        date = datetime.fromisoformat(value).strftime("%d.%m.%Y %X")
+        date = datetime.fromisoformat(value).strftime("%Y-%m-%d %H:%M:%S")
         return date
 
 
