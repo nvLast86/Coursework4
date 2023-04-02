@@ -1,5 +1,3 @@
-from utils.headhunter import HeadHunter
-from utils.superjob import SuperJob
 from datetime import *
 import json
 
@@ -24,7 +22,7 @@ class Connector:
 
     @staticmethod
     def get_json(source_dict):
-        result =[]
+        result = []
         for i in range(len(source_dict)):
             vacancy = {}
             vacancy['source'] = source_dict[i].source
@@ -38,9 +36,10 @@ class Connector:
             vacancy['url'] = source_dict[i].url
             vacancy['date_published'] = source_dict[i].date_published
             result.append(vacancy)
-            x = json.dumps(result, ensure_ascii = False)
-            with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
-                 json.dump(x, outfile, ensure_ascii=False)
+            x = json.dumps(result, ensure_ascii=False)
+            with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w',
+                      encoding='utf-8') as outfile:
+                json.dump(x, outfile, ensure_ascii=False)
 
     # @staticmethod
     # def print_json_to_file(json_file):
@@ -55,7 +54,6 @@ class Connector:
 
     def get_chosen_vacancies_list(self, user_answers):
         result = []
-        oldest_date = datetime.today() - timedelta(days=user_answers[1])
         for vacancy in self.__united_vacancies_list:
             if vacancy.payment[0] > user_answers[0]:
                 result.append(vacancy)
