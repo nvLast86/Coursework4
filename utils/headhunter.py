@@ -48,6 +48,12 @@ class HeadHunter(Engine):
             if item['salary']['to'] is None:
                item['salary']['to'] = 0
 
+    @staticmethod
+    def format_date(value):
+        date = datetime.fromisoformat(value).strftime("%d.%m.%Y %X")
+        return date
+
+
 if __name__ == '__main__':
     test = HeadHunter('python')
     x = test.get_request()
