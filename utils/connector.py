@@ -41,11 +41,6 @@ class Connector:
                       encoding='utf-8') as outfile:
                 json.dump(x, outfile, ensure_ascii=False)
 
-    # @staticmethod
-    # def print_json_to_file(json_file):
-    #     with open(f'vacancies on {datetime.now()}.txt', 'w', encoding='utf-8') as outfile:
-    #         json.dump(json_file, outfile, ensure_ascii=False)
-
     @staticmethod
     def print_vacancies_to_file(vacancy_list):
         with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
