@@ -57,6 +57,3 @@ class HeadHunter(Engine):
         return date
 
 
-if __name__ == '__main__':
-    test = HeadHunter('python')
-    print(test)
