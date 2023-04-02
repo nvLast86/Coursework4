@@ -1,6 +1,5 @@
 import requests
 import os
-import json
 from engine import Engine
 from utils.vacancy import Vacancy
 from datetime import datetime
@@ -14,6 +13,10 @@ class SuperJob(Engine):
         self.keyword = keyword
         self.vacancies = []
         self.get_vacancies()
+
+    def __repr__(self):
+        return f'Результат парсинга по сайту SuperJob.ru по ключевому слову {self.keyword}\n' \
+               f'Количество вакансий: {len(self.vacancies)}'
 
     def get_vacancies(self):
         header = {'X-Api-App-Id': SuperJob.key}
