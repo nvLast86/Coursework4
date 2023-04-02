@@ -53,17 +53,3 @@ class Connector:
 
 
 
-
-
-if __name__ == '__main__':
-    hh = HeadHunter('python')
-    hh.get_vacancies_list(hh.get_request())
-    sj = SuperJob('python')
-    sj.get_vacancies_list(sj.get_request())
-    connector = Connector()
-    connector.united_vacancies_list = hh + sj
-    print(len(connector.united_vacancies_list))
-
-
-
-
