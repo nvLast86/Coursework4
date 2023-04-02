@@ -16,9 +16,9 @@ class Vacancy:
 
     def __repr__(self):
         return f'{self.profession}.\nКомпания {self.firm_name}, город {self.area}.\n' \
-               f'Опыт: {self.format_experience_answer()}. Зарплата: {self.format_payment_answer()}.\n' \
+               f'Опыт: {self.experience}. Зарплата: {self.format_payment_answer()}.\n' \
                f'Описание: {self.description}\n' \
-               f'Ссылка на вакансию: {self.url}.\nДата публикации: {self.format_date()}\n'
+               f'Ссылка на вакансию: {self.url}.\nДата публикации: {self.date_published}\n'
 
     def format_payment_answer(self):
         if self.payment[0] > 0 and self.payment[1] > 0:
@@ -30,20 +30,6 @@ class Vacancy:
         else:
             pay_answer = 'не указана'
         return pay_answer
-
-    def format_experience_answer(self):
-        if self.experience == 0:
-            exp_answer = 'не указан'
-        else:
-            exp_answer = self.experience
-        return exp_answer
-
-    def format_date(self):
-        if self.source == 'SuperJob':
-            date = datetime.fromtimestamp(self.date_published).strftime("%d.%m.%Y %X")
-        else:
-            date = datetime.fromisoformat(self.date_published).strftime("%d.%m.%Y %X")
-        return date
 
 
 
