@@ -3,6 +3,10 @@ import json
 
 
 class Connector:
+    """
+    Класс Connector предназначен для формирования общего ответа с двух сайтов
+    на запрос пользователем вакансий по ключевому слову
+    """
 
     def __init__(self):
         self.__united_vacancies_list = []
@@ -10,10 +14,17 @@ class Connector:
 
     @property
     def united_vacancies_list(self):
+        """
+        Метод, задекорированный под функцию, т.к. аттрибут __united_vacancies_list приватный
+        """
         return self.__united_vacancies_list
 
     @united_vacancies_list.setter
     def united_vacancies_list(self, value):
+        """
+        Прежде, чем аттрибут получит значение, происходит сортировка вакансий по дате
+        размещения на сайте (от свежих к старым).
+        """
         self.__united_vacancies_list = sorted(value, key=lambda x: x.date_published, reverse=True)
 
     @united_vacancies_list.getter
@@ -22,6 +33,11 @@ class Connector:
 
     @staticmethod
     def get_json(source_dict):
+        """
+        Статистический метод для вывода информации по вакансиям в виде JSON файла.
+        Формируется список словарей, созданных на основе аттрибутов экземпляров класса Vacancy,
+        после чего список конвертируется в JSON файл.
+        """
         result = []
         for i in range(len(source_dict)):
             vacancy = {}
@@ -43,11 +59,20 @@ class Connector:
 
     @staticmethod
     def print_vacancies_to_file(vacancy_list):
+        """
+        Статистический метод вывода списка вакансий в виде, удобном для чтения человеку.
+        """
         with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
             for i in range(len(vacancy_list)):
                 outfile.write(f'{i+1}. {vacancy_list[i]}\n')
 
     def get_chosen_vacancies_list(self, user_answers):
+        """
+        Метод создания выборки на основе полученных условий от пользователя.
+        От пользователя приходит список, содержаший информацию о том, начиная от какой суммы он хотел бы
+        видеть зарплату, за сколько дней максимум от текущей даты могут быть вакансии, а также
+        желаемое количество вакансий для отображения.
+        """
         result = []
         for vacancy in self.__united_vacancies_list:
             if vacancy.payment[0] > user_answers[0]:
