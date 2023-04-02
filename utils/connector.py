@@ -44,8 +44,8 @@ class Connector:
         return json.dumps(source_list, ensure_ascii = False)
 
     @staticmethod
-    def print_to_file(json_file):
-        with open(f'vacancies on {datetime.now().date()}.txt', 'w', encoding='utf-8') as outfile:
+    def print_json_to_file(json_file):
+        with open(f'vacancies on {datetime.now()}.txt', 'w', encoding='utf-8') as outfile:
             json.dump(json_file, outfile, ensure_ascii=False)
 
     @staticmethod
