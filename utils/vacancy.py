@@ -29,9 +29,3 @@ class Vacancy:
         else:
             pay_answer = 'не указана'
         return pay_answer
-
-
-
-
-
-
