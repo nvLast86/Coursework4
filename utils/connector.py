@@ -22,7 +22,7 @@ class Connector:
         return self.__united_vacancies_list
 
     @staticmethod
-    def get_dict(source_dict):
+    def get_json(source_dict):
         result =[]
         vacancy = {'source': '', 'id': '', 'profession': '', 'firm_name': '', 'area': '', 'payment': '',
                   'experience': '', 'description': '', 'url': '', 'date_published': ''}
@@ -38,10 +38,7 @@ class Connector:
             vacancy['url'] = item.url
             vacancy['date_published'] = item.date_published
             result.append(vacancy)
-        return result
-    @staticmethod
-    def get_json(source_list):
-        return json.dumps(source_list, ensure_ascii = False)
+        return json.dumps(result, ensure_ascii = False)
 
     @staticmethod
     def print_json_to_file(json_file):
