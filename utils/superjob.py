@@ -6,6 +6,10 @@ from datetime import datetime
 
 
 class SuperJob(Engine):
+    """
+    Класс HeadHunter создан для работы с сайтом superjob.ru. Экземпляры класса создаются на основе переданного
+    ключевого слова от пользователя. Далее идет формирование списка вакансий.
+    """
     key = os.getenv('SJ_API_KEY')
     url = 'https://api.superjob.ru/2.0/vacancies/'
 
@@ -19,6 +23,10 @@ class SuperJob(Engine):
                f'Количество вакансий: {len(self.vacancies)}'
 
     def get_vacancies(self):
+        """
+        Метод получения с сайта superjob.ru вакансий на основе ключевого слова пользователя.
+        :return: список вакансий по ключевому слову.
+        """
         header = {'X-Api-App-Id': SuperJob.key}
         for i in range(5):
             params = {'keyword': self.keyword, 'count': 100, 'page': i}
@@ -39,5 +47,9 @@ class SuperJob(Engine):
 
     @staticmethod
     def format_date(value):
+        """
+        Статистический метод вывода времени публикации вакансии в формате,
+        удобный для пользователя
+        """
         date = datetime.fromtimestamp(value).strftime("%Y-%m-%d %X")
         return date
