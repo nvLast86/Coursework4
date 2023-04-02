@@ -59,9 +59,4 @@ class HeadHunter(Engine):
 
 if __name__ == '__main__':
     test = HeadHunter('python')
-    x = test.get_request()
-    test.correct_vacancies(x)
-    test.get_vacancies_list(x)
-    print(test.vacancies)
-    print(len(test.vacancies))
-    # print(test.correct_vacancies(x))
+    print(test)
