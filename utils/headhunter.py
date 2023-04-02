@@ -1,4 +1,3 @@
-import json
 import requests
 from utils.vacancy import Vacancy
 from datetime import datetime
@@ -29,7 +28,7 @@ class HeadHunter(Engine):
                                               vacancy['employer']['name'],
                                               vacancy['area']['name'],
                                               [int(vacancy['salary']['from']), int(vacancy['salary']['to']),
-                                              vacancy['salary']['currency']],
+                                               vacancy['salary']['currency']],
                                               vacancy['experience'] if 'experience' in vacancy.keys() else 'не указан',
                                               'отсутствует' if vacancy.get('snippet').get('responsibility') is None else
                                               vacancy.get('snippet').get('responsibility'),
@@ -55,5 +54,3 @@ class HeadHunter(Engine):
     def format_date(value):
         date = datetime.fromisoformat(value).strftime("%Y-%m-%d %H:%M:%S")
         return date
-
-
