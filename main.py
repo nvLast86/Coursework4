@@ -43,12 +43,6 @@ def main():
             print(chosen_result)
 
 
-
-
-
-
-
-
-
 main()
+
 
