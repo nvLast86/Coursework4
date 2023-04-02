@@ -28,7 +28,7 @@ class HeadHunter(Engine):
                                               vacancy['name'],
                                               vacancy['employer']['name'],
                                               vacancy['area']['name'],
-                                              [vacancy['salary']['from'], vacancy['salary']['to'],
+                                              [int(vacancy['salary']['from']), int(vacancy['salary']['to']),
                                               vacancy['salary']['currency']],
                                               vacancy['experience'] if 'experience' in vacancy.keys() else 'не указан',
                                               'отсутствует' if vacancy.get('snippet').get('responsibility') is None else
