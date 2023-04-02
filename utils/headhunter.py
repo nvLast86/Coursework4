@@ -13,6 +13,9 @@ class HeadHunter(Engine):
         self.vacancies = []
         self.get_vacancies()
 
+    def __repr__(self):
+        return f'Результат парсинга по сайту HeadHunter.ru по ключевому слову {self.keyword}\n' \
+               f'Количество вакансий: {len(self.vacancies)}'
 
     def get_vacancies(self):
         for i in range(5):
