@@ -31,18 +31,18 @@ class SuperJob(Engine):
                                               vacancy['town']['title'],
                                               [vacancy['payment_from'], vacancy['payment_to'], vacancy['currency']],
                                               vacancy['experience']['title'],
-                                              self.get_description(vacancy),
+                                              vacancy['candidat'],
                                               vacancy['link'],
                                               self.format_date(vacancy['date_published'])))
         return self.vacancies
 
-    @staticmethod
-    def get_description(response):
-        description = []
-        temp = response['candidat'].split('.')
-        for i in range(2):
-            description.append(temp[i])
-        return '. '.join(description)
+    # @staticmethod
+    # def get_description(response):
+    #     description = []
+    #     temp = response['candidat'].split('.')
+    #     for i in range(2):
+    #         description.append(temp[i])
+    #     return '. '.join(description)
 
     @staticmethod
     def format_date(value):
