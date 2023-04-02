@@ -25,21 +25,22 @@ class Connector:
     @staticmethod
     def get_json(source_dict):
         result =[]
-        vacancy = {'source': '', 'id': '', 'profession': '', 'firm_name': '', 'area': '', 'payment': '',
-                  'experience': '', 'description': '', 'url': '', 'date_published': ''}
-        for item in source_dict:
-            vacancy['source'] = item.source
-            vacancy['id'] = item.vacancy_id
-            vacancy['profession'] = item.profession
-            vacancy['firm_name'] = item.firm_name
-            vacancy['area'] = item.area
-            vacancy['payment'] = item.payment
-            vacancy['experience'] = item.experience
-            vacancy['description'] = item.description
-            vacancy['url'] = item.url
-            vacancy['date_published'] = item.date_published
+        for i in range(len(source_dict)):
+            vacancy = {}
+            vacancy['source'] = source_dict[i].source
+            vacancy['id'] = source_dict[i].vacancy_id
+            vacancy['profession'] = source_dict[i].profession
+            vacancy['firm_name'] = source_dict[i].firm_name
+            vacancy['area'] = source_dict[i].area
+            vacancy['payment'] = source_dict[i].payment
+            vacancy['experience'] = source_dict[i].experience
+            vacancy['description'] = source_dict[i].description
+            vacancy['url'] = source_dict[i].url
+            vacancy['date_published'] = source_dict[i].date_published
             result.append(vacancy)
-        return json.dumps(result, ensure_ascii = False)
+            x = json.dumps(result, ensure_ascii = False)
+            with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
+                 json.dump(x, outfile, ensure_ascii=False)
 
     @staticmethod
     def print_json_to_file(json_file):
