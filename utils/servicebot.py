@@ -57,37 +57,35 @@ class ServiceBot:
         видеть зарплату, за сколько дней максимум от текущей даты могут быть вакансии, а также
         желаемое количество вакансий для отображения.
         """
-        result = []
-
         # Проверяем по критерию ожидаемой зарплаты. Если пользователь ввел 0, то пропускаем проверку.
         # Если ни одна вакансия не подходит, то функция завершает свое действие с уведомлением об
         # отсутствии подходящих вакансий.
         if user_answers[0] != 0:
             for vacancy in self.vacancies_list:
                 if vacancy.payment[0] > user_answers[0]:
-                    result.append(vacancy)
+                    self.chosen_vacancies.append(vacancy)
                 elif vacancy.payment[1] > user_answers[0]:
-                    result.append(vacancy)
-        if self.have_vacancies(result) is False:
+                    self.chosen_vacancies.append(vacancy)
+        if self.have_vacancies(self.chosen_vacancies) is False:
             return 'Увы, вакансий с такой зп нет.'
 
         # Проверяем по критерию даты публикации. Если пользователь ввел 0, то пропускаем проверку.
         # Если ни одна вакансия не была в ожидаемый период опубликована, то функция завершает свое действие
         # с уведомлением об этом.
         if user_answers[1] != 0:
-            for vacancy in result:
+            for vacancy in self.chosen_vacancies:
                 temp_list = vacancy.date_published.split('-')
                 vacancy_date = datetime(int(temp_list[0]), int(temp_list[1]), int(temp_list[2][:2]))
                 period = datetime.now() - vacancy_date
                 if period.days >= user_answers[1]:
                     del vacancy
-        if self.have_vacancies(result) is False:
+        if self.have_vacancies(self.chosen_vacancies) is False:
             return 'Увы, за такой временной промежуток вакансий не появлялось.'
 
         # Выдаем желаемое количество вакансий. Если вакансий меньше, чем желаемый топ, то выдаем все, что есть.
-        if user_answers[2] != 0 or len(result) < user_answers[2]:
-            return result
-        return result[0:user_answers[2]]
+        if user_answers[2] != 0 or len(self.chosen_vacancies) < user_answers[2]:
+            return self.chosen_vacancies
+        return self.chosen_vacancies[0:user_answers[2]]
 
     @staticmethod
     def check_answer(answer):
