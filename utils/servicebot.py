@@ -6,14 +6,20 @@ class ServiceBot:
         self.questions = ['От какого размера зарплаты смотреть?\n', 'За сколько дней сделать выборку?\n',
                           'Сколькими вакансиями ограничить выборку?\n']
         self.user_answers = []
-        self.is_positive_answer = True
+        self.is_positive_answer = False
         self.is_correct = False
 
-    def __repr__(self):
-        return 'Приветствую! Я специальный бот для работы с полученным списком.'
+    def __str__(self):
+        if self.is_positive_answer:
+            return f'Приветствую! Я специальный бот для работы с полученным списком.\n' \
+                   f'Список большой, в нем {len(self.vacancies_list)} вакансий, могу сделать более ' \
+                   f'точную выборку.\n'\
+                   f'Если нажмешь (y), то я поработаю со списком.\n'
+        else:
+            return 'Хорошо, тогда просто выведу список вакансий в файл.\n'
 
-    def speak_to_user(self):
-        print('Задам несколько вопросов для создания выборки.')
+    def poll_user(self):
+        print('Хорошо! Предварительно задам несколько вопросов для создания выборки.')
         for question in self.questions:
             while True:
                 user_decision = input(question)
@@ -40,7 +46,7 @@ class ServiceBot:
 if __name__ == '__main__':
     bot = ServiceBot()
     print(bot)
-    bot.speak_to_user()
+    bot.poll_user()
     print(bot.user_answers)
 
 
