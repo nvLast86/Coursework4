@@ -72,17 +72,11 @@ class ServiceBot:
             return True
         return False
 
-
-
-
-    # def make_deal_with_user(self, ):
-
-
-if __name__ == '__main__':
-    bot = ServiceBot()
-    print(bot)
-    bot.poll_user()
-    print(bot.user_answers)
+    @staticmethod
+    def have_vacancies(check_list):
+        if len(check_list) > 0:
+            return True
+        return False
 
 
 
