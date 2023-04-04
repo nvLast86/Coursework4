@@ -18,6 +18,7 @@ def main():
     print(f'Список по ключевому слову {user_keyword} создан.\n'
           f'Количество вакансий: {len(connector.united_vacancies_list)}\n')
 
+    # Создаем бота для опроса пользователя и создании выборки на основе ответов
     bot = ServiceBot(connector.united_vacancies_list)
     print(bot)
     user_answer = input()
@@ -28,16 +29,19 @@ def main():
         bot.poll_user()
         bot.get_chosen_vacancies_list(bot.user_answers)
         print(bot.success)
+
+        # Предлагаем распечатать результаты
         connector.chosen_vacancies_list = bot.chosen_vacancies
         user_answer = input('Распечатать полный список вакансий в файл?\n(y) - да, иной ввод - нет\n')
         if user_answer.lower() == 'y':
             connector.print_vacancies_to_file(connector.united_vacancies_list)
             connector.get_json(connector.united_vacancies_list)
-        user_answer = input('Распечатать список вакансий на основе выборки в файл?\n(y) - да, иной ввод - нет\n')
-        if user_answer.lower() == 'y':
-            connector.print_vacancies_to_file(connector.chosen_vacancies_list)
-            connector.get_json(connector.chosen_vacancies_list)
+        if bot.is_positive_answer:
+            user_answer = input('Распечатать список вакансий на основе выборки в файл?\n(y) - да, иной ввод - нет\n')
+            if user_answer.lower() == 'y':
+                connector.print_vacancies_to_file(connector.chosen_vacancies_list)
+                connector.get_json(connector.chosen_vacancies_list)
 
-
+    print('Готово!')
 if __name__ == '__main__':
     main()
