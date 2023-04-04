@@ -16,7 +16,7 @@ def main():
     connector = Connector()
     connector.united_vacancies_list = [*hh.vacancies, *sj.vacancies]
     print(f'Список по ключевому слову {user_keyword} создан.\n'
-          f'Количество вакансий: {len(connector.united_vacancies_list)}')
+          f'Количество вакансий: {len(connector.united_vacancies_list)}\n')
 
     bot = ServiceBot(connector.united_vacancies_list)
     print(bot)
@@ -35,7 +35,7 @@ def main():
             connector.get_json(connector.united_vacancies_list)
         user_answer = input('Распечатать список вакансий на основе выборки в файл?\n(y) - да, иной ввод - нет\n')
         if user_answer.lower() == 'y':
-            connector.print_vacancies_to_file(connector.united_vacancies_list)
+            connector.print_vacancies_to_file(connector.chosen_vacancies_list)
             connector.get_json(connector.chosen_vacancies_list)
 
 
