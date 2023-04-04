@@ -11,7 +11,7 @@ class Connector:
 
     def __init__(self):
         self.__united_vacancies_list = []
-        self.chosen_vacancies_list = []
+        self.__chosen_vacancies_list = []
 
     @property
     def united_vacancies_list(self):
@@ -32,8 +32,22 @@ class Connector:
     def united_vacancies_list(self):
         return self.__united_vacancies_list
 
-    @staticmethod
-    def get_json(source_dict):
+    @property
+    def chosen_vacancies_list(self):
+        """
+        Метод, задекорированный под функцию, т.к. аттрибут __chosen_vacancies_list приватный
+        """
+        return self.__chosen_vacancies_list
+
+    @chosen_vacancies_list.getter
+    def chosen_vacancies_list(self):
+        return self.__chosen_vacancies_list
+
+    @chosen_vacancies_list.setter
+    def chosen_vacancies_list(self, value):
+        self.__chosen_vacancies_list = value
+
+    def get_json(self, source):
         """
         Статистический метод для вывода информации по вакансиям в виде JSON файла.
         Формируется список словарей, созданных на основе аттрибутов экземпляров класса Vacancy,
