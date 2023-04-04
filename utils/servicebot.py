@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class ServiceBot:
 
     # def __init__(self, vacancies_list):
@@ -30,6 +33,38 @@ class ServiceBot:
                     break
                 else:
                     print('Некорректное значение! Введите целое число, либо 0, чтобы пропустить данный вопрос.')
+
+    def get_chosen_vacancies_list(self, user_answers):
+        """
+        Метод создания выборки на основе полученных условий от пользователя.
+        От пользователя приходит список, содержаший информацию о том, начиная от какой суммы он хотел бы
+        видеть зарплату, за сколько дней максимум от текущей даты могут быть вакансии, а также
+        желаемое количество вакансий для отображения.
+        """
+        result = []
+
+        if user_answers[0] != 0:
+            for vacancy in self.vacancies_list:
+                if vacancy.payment[0] > user_answers[0]:
+                    result.append(vacancy)
+                elif vacancy.payment[1] > user_answers[0]:
+                    result.append(vacancy)
+        if self.have_vacancies(result) is False:
+            return 'Увы, вакансий с такой зп нет.'
+
+        if user_answers[1] != 0:
+            for vacancy in result:
+                temp_list = vacancy.date_published.split('-')
+                vacancy_date = datetime(int(temp_list[0]), int(temp_list[1]), int(temp_list[2][:2]))
+                period = datetime.now() - vacancy_date
+                if period.days >= user_answers[1]:
+                    del vacancy
+        if self.have_vacancies(result) is False:
+            return 'Увы, за такой временной промежуток вакансий не появлялось.'
+
+        if user_answers[2] != 0 or len(result) < user_answers[2]:
+            return result
+        return result[0:user_answers[2]]
 
     @staticmethod
     def check_answer(answer):
