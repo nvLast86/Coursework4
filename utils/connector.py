@@ -5,8 +5,8 @@ import json
 class Connector:
     """
     Класс Connector предназначен для формирования общего ответа с двух сайтов
-    на запрос пользователем вакансий по ключевому слову, а также формированию
-    выборки на основе требований пользователя.
+    на запрос пользователем вакансий по ключевому слову, а также печать в удобном для чтения
+    пользователем файла .txt и в виде JSON файла.
     """
 
     def __init__(self):
@@ -49,36 +49,44 @@ class Connector:
 
     def get_json(self, source):
         """
-        Статистический метод для вывода информации по вакансиям в виде JSON файла.
+        Метод для вывода информации по вакансиям в виде JSON файла.
         Формируется список словарей, созданных на основе аттрибутов экземпляров класса Vacancy,
         после чего список конвертируется в JSON файл.
         """
         result = []
-        for i in range(len(source_dict)):
+        current_date = datetime.now().strftime("%Y-%m-%d %H-%M")
+        for i in range(len(source)):
             vacancy = {}
-            vacancy['source'] = source_dict[i].source
-            vacancy['id'] = source_dict[i].vacancy_id
-            vacancy['profession'] = source_dict[i].profession
-            vacancy['firm_name'] = source_dict[i].firm_name
-            vacancy['area'] = source_dict[i].area
-            vacancy['payment'] = source_dict[i].payment
-            vacancy['experience'] = source_dict[i].experience
-            vacancy['description'] = source_dict[i].description
-            vacancy['url'] = source_dict[i].url
-            vacancy['date_published'] = source_dict[i].date_published
+            vacancy['source'] = source[i].source
+            vacancy['id'] = source[i].vacancy_id
+            vacancy['profession'] = source[i].profession
+            vacancy['firm_name'] = source[i].firm_name
+            vacancy['area'] = source[i].area
+            vacancy['payment'] = source[i].payment
+            vacancy['experience'] = source[i].experience
+            vacancy['description'] = source[i].description
+            vacancy['url'] = source[i].url
+            vacancy['date_published'] = source[i].date_published
             result.append(vacancy)
             x = json.dumps(result, ensure_ascii=False)
-            with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w',
-                      encoding='utf-8') as outfile:
-                json.dump(x, outfile, ensure_ascii=False)
+            if source is self.__united_vacancies_list:
+                with open(f'vacancies json on {current_date}.txt', 'w', encoding='utf-8') as outfile:
+                    json.dump(x, outfile, ensure_ascii=False)
+            else:
+                with open(f'sorted vacancies json on {current_date}.txt', 'w', encoding='utf-8') as outfile:
+                    json.dump(x, outfile, ensure_ascii=False)
 
-    @staticmethod
-    def print_vacancies_to_file(vacancy_list):
+    def print_vacancies_to_file(self, vacancy_list):
         """
-        Статистический метод вывода списка вакансий в виде, удобном для чтения человеку.
+        Метод вывода списка вакансий в виде, удобном для чтения человеку.
         """
-        with open(f'vacancies on {datetime.now().strftime("%Y-%m-%d %H-%M")}.txt', 'w', encoding='utf-8') as outfile:
-            for i in range(len(vacancy_list)):
-                outfile.write(f'{i+1}. {vacancy_list[i]}\n')
-
+        current_date = datetime.now().strftime("%Y-%m-%d %H-%M")
+        if vacancy_list is self.__united_vacancies_list:
+            with open(f'vacancies on {current_date}.txt', 'w', encoding='utf-8') as outfile:
+                for i in range(len(vacancy_list)):
+                    outfile.write(f'{i+1}. {vacancy_list[i]}\n')
+        else:
+            with open(f'sorted vacancies on {current_date}.txt', 'w', encoding='utf-8') as outfile:
+                for i in range(len(vacancy_list)):
+                    outfile.write(f'{i+1}. {vacancy_list[i]}\n')
 
