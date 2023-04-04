@@ -1,6 +1,7 @@
 from utils.connector import Connector
 from utils.headhunter import HeadHunter
 from utils.superjob import SuperJob
+from utils.servicebot import ServiceBot
 
 user_decisions = []
 
@@ -14,34 +15,29 @@ def main():
     sj = SuperJob(user_keyword)
     connector = Connector()
     connector.united_vacancies_list = [*hh.vacancies, *sj.vacancies]
-    print(f'Список по ключевому слову {user_keyword} создан')
+    print(f'Список по ключевому слову {user_keyword} создан.\n'
+          f'Количество вакансий: {len(connector.united_vacancies_list)}')
 
-    # Создаем текстовый файл со всеми вакансиями по желанию пользователя
-    user_decision = input('Распечатать в файл?\n(y) - да, остальные нажатия - нет\n')
-    if user_decision.lower() == 'y':
-        connector.print_vacancies_to_file(connector.united_vacancies_list)
-        print('Файл создан!\n')
+    bot = ServiceBot(connector.united_vacancies_list)
+    print(bot)
+    user_answer = input()
+    if user_answer != 'y':
+        bot.is_positive_answer = False
+        print(bot)
     else:
-        print('ok, пропустим\n')
-
-    # Предлагаем создать отдельный файл с выборкой
-    user_decision = input('Может, сформировать выборку?\n(y) - да, остальные нажатия - нет\n')
-    if user_decision.lower() != 'y':
-        print('ok, пропустим\n')
-    else:
-        user_decision = int(input('От какого размера зарплаты смотреть?\n'))
-        user_decisions.append(int(user_decision))
-        user_decision = int(input('За сколько дней сделать выборку?\n'))
-        user_decisions.append(int(user_decision))
-        user_decision = int(input('Сколькими вакансиями ограничить выборку?\n'))
-        user_decisions.append(int(user_decision))
-        chosen_result = connector.get_chosen_vacancies_list(user_decisions)
-        user_decision = input('Информация сформирована! Распечатать в файл?\n(y) - да, остальные нажатия - нет\n')
-        if user_decision.lower() == 'y':
-            connector.print_vacancies_to_file(chosen_result)
-        else:
-            print("Результаты выборки:\n")
-            print(chosen_result)
+        bot.poll_user()
+        bot.get_chosen_vacancies_list(bot.user_answers)
+        print(bot.success)
+        connector.chosen_vacancies_list = bot.chosen_vacancies
+        user_answer = input('Распечатать полный список вакансий в файл?\n(y) - да, иной ввод - нет\n')
+        if user_answer.lower() == 'y':
+            connector.print_vacancies_to_file(connector.united_vacancies_list)
+            connector.get_json(connector.united_vacancies_list)
+        user_answer = input('Распечатать список вакансий на основе выборки в файл?\n(y) - да, иной ввод - нет\n')
+        if user_answer.lower() == 'y':
+            connector.print_vacancies_to_file(connector.united_vacancies_list)
+            connector.get_json(connector.chosen_vacancies_list)
 
 
-main()
+if __name__ == '__main__':
+    main()
