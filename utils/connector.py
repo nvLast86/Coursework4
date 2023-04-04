@@ -67,23 +67,4 @@ class Connector:
             for i in range(len(vacancy_list)):
                 outfile.write(f'{i+1}. {vacancy_list[i]}\n')
 
-    def get_chosen_vacancies_list(self, user_answers):
-        """
-        Метод создания выборки на основе полученных условий от пользователя.
-        От пользователя приходит список, содержаший информацию о том, начиная от какой суммы он хотел бы
-        видеть зарплату, за сколько дней максимум от текущей даты могут быть вакансии, а также
-        желаемое количество вакансий для отображения.
-        """
-        result = []
-        for vacancy in self.__united_vacancies_list:
-            if vacancy.payment[0] > user_answers[0]:
-                result.append(vacancy)
-            elif vacancy.payment[1] > user_answers[0]:
-                result.append(vacancy)
-        for vacancy in result:
-            temp_list = vacancy.date_published.split('-')
-            vacancy_date = datetime(int(temp_list[0]), int(temp_list[1]), int(temp_list[2][:2]))
-            period = datetime.now() - vacancy_date
-            if period.days >= user_answers[1]:
-                del vacancy
-        return result[0:user_answers[2]]
+
