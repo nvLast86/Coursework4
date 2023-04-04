@@ -2,7 +2,7 @@ class ServiceBot:
 
     # def __init__(self, vacancies_list):
     def __init__(self):
-        self.vacancies_list = ''
+        self.vacancies_list = []
         self.questions = ['От какого размера зарплаты смотреть?\n', 'За сколько дней сделать выборку?\n',
                           'Сколькими вакансиями ограничить выборку?\n']
         self.user_answers = []
