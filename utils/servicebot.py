@@ -12,9 +12,11 @@ class ServiceBot:
         self.vacancies_list = vacancies_list
         self.questions = ['От какого размера зарплаты смотреть?\n', 'За сколько дней сделать выборку?\n',
                           'Сколькими вакансиями ограничить выборку?\n']
+        self.success = 'Список на основе ваших критериев успешно сформирован!'
         self.user_answers = []
-        self.is_positive_answer = False
+        self.is_positive_answer = True
         self.is_correct = False
+        self.chosen_vacancies = []
 
     def __str__(self):
         """
@@ -51,7 +53,7 @@ class ServiceBot:
     def get_chosen_vacancies_list(self, user_answers):
         """
         Метод создания выборки на основе полученных условий от пользователя.
-        От пользователя приходит список, содержаший информацию о том, начиная от какой суммы он хотел бы
+        От пользователя приходит список, содержащий информацию о том, начиная от какой суммы он хотел бы
         видеть зарплату, за сколько дней максимум от текущей даты могут быть вакансии, а также
         желаемое количество вакансий для отображения.
         """
@@ -105,8 +107,3 @@ class ServiceBot:
         if len(check_list) > 0:
             return True
         return False
-
-
-
-
-
