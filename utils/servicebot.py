@@ -12,7 +12,6 @@ class ServiceBot:
         self.vacancies_list = vacancies_list
         self.questions = ['От какого размера зарплаты смотреть?\n', 'За сколько дней сделать выборку?\n',
                           'Сколькими вакансиями ограничить выборку?\n']
-        self.success = 'Список на основе ваших критериев успешно сформирован!\n'
         self.user_answers = []
         self.is_positive_answer = True
         self.is_correct = False
