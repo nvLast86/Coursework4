@@ -28,7 +28,6 @@ def main():
     else:
         bot.poll_user()
         bot.get_chosen_vacancies_list(bot.user_answers)
-        print(bot.success)
 
         # Предлагаем распечатать результаты
         connector.chosen_vacancies_list = bot.chosen_vacancies
