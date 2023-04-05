@@ -42,5 +42,7 @@ def main():
                 connector.get_json(connector.chosen_vacancies_list)
 
     print('Готово!')
+
+
 if __name__ == '__main__':
     main()
