@@ -1,6 +1,5 @@
 import requests
 from utils.vacancy import Vacancy
-from datetime import datetime
 from utils.engine import Engine
 
 
