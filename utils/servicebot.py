@@ -82,9 +82,9 @@ class ServiceBot:
             return 'Увы, за такой временной промежуток вакансий не появлялось.'
 
         # Выдаем желаемое количество вакансий. Если вакансий меньше, чем желаемый топ, то выдаем все, что есть.
-        if user_answers[2] == 0 or len(self.chosen_vacancies) < user_answers[2]:
-            return self.chosen_vacancies
-        return self.chosen_vacancies[0:user_answers[2]]
+        if user_answers[2] != 0 or len(self.chosen_vacancies) > user_answers[2]:
+            self.chosen_vacancies = self.chosen_vacancies[0:user_answers[2]]
+
 
     @staticmethod
     def check_answer(answer):
