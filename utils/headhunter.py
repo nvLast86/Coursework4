@@ -68,5 +68,7 @@ class HeadHunter(Engine):
         Статистический метод вывода времени публикации вакансии в формате,
         удобный для пользователя
         """
-        date = datetime.fromisoformat(value).strftime("%Y-%m-%d %H:%M:%S")
-        return date
+        time = value.split('T')
+        time[1] = time[1][:8]
+        time = ' '.join(time)
+        return time
